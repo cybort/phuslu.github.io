@@ -24,8 +24,8 @@ function __($message) {
 		'L2 Cache' => '二级缓存',
 		'Frequency' => '频率',
 		'CPU Instruction Set' => 'CPU 指令集',
+		'BIOS Vendor' => 'BIOS 厂商',
 		'MotherBoard Model' => '主板型号',
-		'MotherBoard BIOS' => '主板 BIOS',
 		'HardDisk Model' => '硬盘型号',
 		'CPU Usage' => 'CPU 使用状况',
 		'CPU Temperature' => 'CPU 温度',
@@ -325,11 +325,11 @@ function get_boardinfo()
 {
 	$info = array();
 
-	if (is_file('/sys/devices/virtual/dmi/id/board_name'))
+	if (is_file('/sys/class/dmi/id/board_name'))
 	{
-		$info['boardVendor'] = array_shift(file('/sys/devices/virtual/dmi/id/board_vendor', FILE_IGNORE_NEW_LINES));
-		$info['boardName'] = array_shift(file('/sys/devices/virtual/dmi/id/board_name', FILE_IGNORE_NEW_LINES));
-		$info['boardVersion'] = array_shift(file('/sys/devices/virtual/dmi/id/board_version', FILE_IGNORE_NEW_LINES));
+		$info['boardVendor'] = array_shift(file('/sys/class/dmi/id/board_vendor', FILE_IGNORE_NEW_LINES));
+		$info['boardName'] = array_shift(file('/sys/class/dmi/id/board_name', FILE_IGNORE_NEW_LINES));
+		$info['boardVersion'] = array_shift(file('/sys/class/dmi/id/board_version', FILE_IGNORE_NEW_LINES));
 	}
 	else if (is_file('/sys/devices/virtual/android_usb/android0/f_rndis/manufacturer'))
 	{
@@ -338,11 +338,11 @@ function get_boardinfo()
 		$info['boardVersion'] = '';
 	}
 
-	if (is_file('/sys/devices/virtual/dmi/id/bios_vendor'))
+	if (is_file('/sys/class/dmi/id/bios_vendor'))
 	{
-		$info['BIOSVendor'] = array_shift(file('/sys/devices/virtual/dmi/id/bios_vendor', FILE_IGNORE_NEW_LINES));
-		$info['BIOSVersion'] = array_shift(file('/sys/devices/virtual/dmi/id/bios_version', FILE_IGNORE_NEW_LINES));
-		$info['BIOSDate'] = array_shift(file('/sys/devices/virtual/dmi/id/bios_date', FILE_IGNORE_NEW_LINES));
+		$info['BIOSVendor'] = array_shift(file('/sys/class/dmi/id/bios_vendor', FILE_IGNORE_NEW_LINES));
+		$info['BIOSVersion'] = array_shift(file('/sys/class/dmi/id/bios_version', FILE_IGNORE_NEW_LINES));
+		$info['BIOSDate'] = array_shift(file('/sys/class/dmi/id/bios_date', FILE_IGNORE_NEW_LINES));
 	}
 	else if (is_file('/sys/devices/virtual/android_usb/android0/iProduct'))
 	{
@@ -623,12 +623,12 @@ body {
 	<td><span id="gpu_temp"><?php echo $tempinfo['gpu'];?></span></td>
 	</tr>
 <?php endif; ?>
-<?php if (isset($boardinfo['boardVendor'])) : ?>
+<?php if (isset($boardinfo['BIOSVendor'])) : ?>
 	<tr>
+	<td><?php __('BIOS Vendor'); ?></td>
+	<td><?php echo $boardinfo['BIOSVendor'] . " " . $boardinfo['BIOSVersion'] . " " . $boardinfo['BIOSDate'];?></td>
 	<td><?php __('MotherBoard Model'); ?></td>
 	<td><?php echo $boardinfo['boardVendor'] . " " . $boardinfo['boardName'] . " " . $boardinfo['boardVersion'];?></td>
-	<td><?php __('MotherBoard BIOS'); ?></td>
-	<td><?php echo $boardinfo['BIOSVendor'] . " " . $boardinfo['BIOSVersion'] . " " . $boardinfo['BIOSDate'];?></td>
 	</tr>
 <?php endif; ?>
 <?php if (isset($boardinfo['diskModel'])) : ?>
