@@ -24,8 +24,8 @@ function __($message) {
 		'L2 Cache' => '二级缓存',
 		'Frequency' => '频率',
 		'CPU Instruction Set' => 'CPU 指令集',
-		'BIOS Vendor' => 'BIOS 厂商',
-		'MotherBoard Model' => '主板型号',
+		'BIOS Version' => 'BIOS 版本',
+		'Board Vendor' => '主板厂商',
 		'HardDisk Model' => '硬盘型号',
 		'CPU Usage' => 'CPU 使用状况',
 		'CPU Temperature' => 'CPU 温度',
@@ -325,30 +325,24 @@ function get_boardinfo()
 {
 	$info = array();
 
-	if (is_file('/sys/class/dmi/id/board_name'))
-	{
-		$info['boardVendor'] = array_shift(file('/sys/class/dmi/id/board_vendor', FILE_IGNORE_NEW_LINES));
-		$info['boardName'] = array_shift(file('/sys/class/dmi/id/board_name', FILE_IGNORE_NEW_LINES));
-		$info['boardVersion'] = array_shift(file('/sys/class/dmi/id/board_version', FILE_IGNORE_NEW_LINES));
-	}
-	else if (is_file('/sys/devices/virtual/android_usb/android0/f_rndis/manufacturer'))
-	{
-		$info['boardVendor'] = array_shift(file('/sys/devices/virtual/android_usb/android0/f_rndis/manufacturer', FILE_IGNORE_NEW_LINES));
-		$info['boardName'] = '';
-		$info['boardVersion'] = '';
-	}
-
 	if (is_file('/sys/class/dmi/id/bios_vendor'))
 	{
 		$info['BIOSVendor'] = array_shift(file('/sys/class/dmi/id/bios_vendor', FILE_IGNORE_NEW_LINES));
 		$info['BIOSVersion'] = array_shift(file('/sys/class/dmi/id/bios_version', FILE_IGNORE_NEW_LINES));
 		$info['BIOSDate'] = array_shift(file('/sys/class/dmi/id/bios_date', FILE_IGNORE_NEW_LINES));
 	}
-	else if (is_file('/sys/devices/virtual/android_usb/android0/iProduct'))
+
+	if (is_file('/sys/class/dmi/id/board_name'))
 	{
-		$info['BIOSVendor'] = array_shift(file('/sys/devices/virtual/android_usb/android0/iManufacturer', FILE_IGNORE_NEW_LINES));
-		$info['BIOSVersion'] = array_shift(file('/sys/devices/virtual/android_usb/android0/iProduct', FILE_IGNORE_NEW_LINES));
-		$info['BIOSDate'] = '';
+		$info['boardVendor'] = array_shift(file('/sys/class/dmi/id/board_vendor', FILE_IGNORE_NEW_LINES));
+		$info['boardName'] = array_shift(file('/sys/class/dmi/id/board_name', FILE_IGNORE_NEW_LINES));
+		$info['boardVersion'] = array_shift(file('/sys/class/dmi/id/board_version', FILE_IGNORE_NEW_LINES));
+	}
+	else if (is_file('/sys/class/dmi/id/product_name'))
+	{
+		$info['boardVendor'] = array_shift(file('/sys/class/dmi/id/product_name', FILE_IGNORE_NEW_LINES));
+		$info['boardName'] = '';
+		$info['boardVersion'] = '';
 	}
 
 	if ($dirs=glob('/sys/class/block/s*'))
@@ -625,9 +619,9 @@ body {
 <?php endif; ?>
 <?php if (isset($boardinfo['BIOSVendor'])) : ?>
 	<tr>
-	<td><?php __('BIOS Vendor'); ?></td>
+	<td><?php __('BIOS Version'); ?></td>
 	<td><?php echo $boardinfo['BIOSVendor'] . " " . $boardinfo['BIOSVersion'] . " " . $boardinfo['BIOSDate'];?></td>
-	<td><?php __('MotherBoard Model'); ?></td>
+	<td><?php __('Board Vendor'); ?></td>
 	<td><?php echo $boardinfo['boardVendor'] . " " . $boardinfo['boardName'] . " " . $boardinfo['boardVersion'];?></td>
 	</tr>
 <?php endif; ?>
