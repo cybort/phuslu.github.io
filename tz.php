@@ -562,7 +562,7 @@ body {
 	</tr>
 	<tr>
 	<td><?php __('Hostname'); ?></td>
-	<td colspan="3"><?php echo $_SERVER['USER'];?> - <?php $os = explode(' ', $uname); echo $os[1];?>(<?php echo $server_addr; ?>)&nbsp;&nbsp;<?php __('your ip is:'); ?><?php echo $remote_addr;?> <span id="iploc"></span></td>
+	<td colspan="3"><?php $os = explode(' ', $uname); echo $os[1];?>(<?php echo $server_addr; ?>)&nbsp;&nbsp;<?php __('your ip is:'); ?><?php echo $remote_addr;?> <span id="iploc"></span></td>
 	</tr>
 	<tr>
 	<td><?php __('Uname'); ?></td>
