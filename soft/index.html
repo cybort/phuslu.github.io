@@ -15,7 +15,7 @@
 	var show_readme_md = true
 	var max_name_length = 50
 
-	var cdom = {
+	var dom = {
 		element: null,
 		get: function (o) {
 			var obj = Object.create(this)
@@ -23,7 +23,7 @@
 			return obj
 		},
 		add: function (o) {
-			var obj = cdom.get(o)
+			var obj = dom.get(o)
 			this.element.appendChild(obj.element)
 			return obj
 		},
@@ -38,7 +38,7 @@
 	}
 
 	if (!document.head) return
-	head = cdom.get(document.head)
+	head = dom.get(document.head)
 	head.add('meta').attr('charset', 'utf-8')
 	head.add('meta').attr('name', 'viewport').attr('content', 'width=device-width,initial-scale=1')
 
@@ -62,7 +62,7 @@
 	var bodylines = document.body.innerHTML.split('\n')
 	document.body.innerHTML = ''
 
-	div = cdom.get('div').attr('class', 'container')
+	div = dom.get('div').attr('class', 'container')
 	div.add('table').add('tbody').add('tr').add('th').text(document.title)
 	tbody = div.add('table').attr('class', 'table-hover').add('tbody')
 

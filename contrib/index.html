@@ -10,6 +10,7 @@
 <a href="octicons.css">octicons.css</a>	21-Jul-2017 13:41 113K
 <a href="Preferences.sublime-settings">Preferences.sublime-settings</a>	10-May-2017 19:46 391
 <a href="pychrome_demo.py">pychrome_demo.py</a>	11-Jan-2018 15:18 6.6K
+<a href="pychrome_for_tianyancha.py">pychrome_for_tianyancha.py</a>	31-Jan-2018 11:51 6.4K
 <a href="random_words.py">random_words.py</a>	10-May-2017 19:46 686
 <a href="rdpproxy.go">rdpproxy.go</a>	10-May-2017 19:46 1.5K
 <a href="stunnel.conf">stunnel.conf</a>	29-Nov-2017 01:52 467
@@ -23,7 +24,7 @@
 	var show_readme_md = true
 	var max_name_length = 50
 
-	var cdom = {
+	var dom = {
 		element: null,
 		get: function (o) {
 			var obj = Object.create(this)
@@ -31,7 +32,7 @@
 			return obj
 		},
 		add: function (o) {
-			var obj = cdom.get(o)
+			var obj = dom.get(o)
 			this.element.appendChild(obj.element)
 			return obj
 		},
@@ -46,7 +47,7 @@
 	}
 
 	if (!document.head) return
-	head = cdom.get(document.head)
+	head = dom.get(document.head)
 	head.add('meta').attr('charset', 'utf-8')
 	head.add('meta').attr('name', 'viewport').attr('content', 'width=device-width,initial-scale=1')
 
@@ -70,7 +71,7 @@
 	var bodylines = document.body.innerHTML.split('\n')
 	document.body.innerHTML = ''
 
-	div = cdom.get('div').attr('class', 'container')
+	div = dom.get('div').attr('class', 'container')
 	div.add('table').add('tbody').add('tr').add('th').text(document.title)
 	tbody = div.add('table').attr('class', 'table-hover').add('tbody')
 

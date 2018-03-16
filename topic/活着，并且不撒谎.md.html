@@ -169,7 +169,7 @@ And if we get cold feet, even taking this step, then we are worthless and hopele
 <script>
 !function(){
 	var render_readme = true
-	var cdom = {
+	var dom = {
 		element: null,
 		get: function (o) {
 			var obj = Object.create(this)
@@ -177,7 +177,7 @@ And if we get cold feet, even taking this step, then we are worthless and hopele
 			return obj
 		},
 		add: function (o) {
-			var obj = cdom.get(o)
+			var obj = dom.get(o)
 			this.element.appendChild(obj.element)
 			return obj
 		},
@@ -192,7 +192,7 @@ And if we get cold feet, even taking this step, then we are worthless and hopele
 	}
 
 	if (!document.head) return
-	head = cdom.get(document.head)
+	head = dom.get(document.head)
 	head.add('meta').attr('charset', 'utf-8')
 	head.add('meta').attr('name', 'viewport').attr('content', 'width=device-width,initial-scale=1')
 
@@ -213,7 +213,7 @@ And if we get cold feet, even taking this step, then we are worthless and hopele
 	var bodytext = document.body.innerHTML
 	document.body.innerHTML = ''
 
-	div = cdom.get('div').attr('class', 'container')
+	div = dom.get('div').attr('class', 'container')
 
 	div.add('script').attr('src', 'https://cdn.bootcss.com/marked/0.3.6/marked.min.js')
 	div.add('link').attr('rel', 'stylesheet').attr('href', 'https://cdn.bootcss.com/github-markdown-css/2.8.0/github-markdown.min.css')

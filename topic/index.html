@@ -1,10 +1,10 @@
 <html><head><title>Index of /</title></head><body><pre>
 <a href="不要怂.md">不要怂.md</a>	17-May-2017 21:42 7.6K
-<a href="不要怂.md.html">不要怂.md.html</a>	04-Mar-2018 00:31 12K
+<a href="不要怂.md.html">不要怂.md.html</a>	14-Mar-2018 15:31 12K
 <a href="国王的九十亿个名字.md">国王的九十亿个名字.md</a>	25-Feb-2018 21:46 2.3K
-<a href="国王的九十亿个名字.md.html">国王的九十亿个名字.md.html</a>	04-Mar-2018 00:31 5.9K
+<a href="国王的九十亿个名字.md.html">国王的九十亿个名字.md.html</a>	14-Mar-2018 15:31 5.9K
 <a href="活着，并且不撒谎.md">活着，并且不撒谎.md</a>	28-Aug-2017 10:00 21K
-<a href="活着，并且不撒谎.md.html">活着，并且不撒谎.md.html</a>	04-Mar-2018 00:31 25K
+<a href="活着，并且不撒谎.md.html">活着，并且不撒谎.md.html</a>	14-Mar-2018 15:31 25K
 </pre></body></html>
 <!-- autoindex for nginx, see https://phuslu.github.io -->
 <script>
@@ -12,7 +12,7 @@
 	var show_readme_md = true
 	var max_name_length = 50
 
-	var cdom = {
+	var dom = {
 		element: null,
 		get: function (o) {
 			var obj = Object.create(this)
@@ -20,7 +20,7 @@
 			return obj
 		},
 		add: function (o) {
-			var obj = cdom.get(o)
+			var obj = dom.get(o)
 			this.element.appendChild(obj.element)
 			return obj
 		},
@@ -35,7 +35,7 @@
 	}
 
 	if (!document.head) return
-	head = cdom.get(document.head)
+	head = dom.get(document.head)
 	head.add('meta').attr('charset', 'utf-8')
 	head.add('meta').attr('name', 'viewport').attr('content', 'width=device-width,initial-scale=1')
 
@@ -59,7 +59,7 @@
 	var bodylines = document.body.innerHTML.split('\n')
 	document.body.innerHTML = ''
 
-	div = cdom.get('div').attr('class', 'container')
+	div = dom.get('div').attr('class', 'container')
 	div.add('table').add('tbody').add('tr').add('th').text(document.title)
 	tbody = div.add('table').attr('class', 'table-hover').add('tbody')
 
