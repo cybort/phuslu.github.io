@@ -805,7 +805,7 @@ a:hover, a:focus {
 </style>
 
 <script type="text/javascript">
-var cdom = {
+var dom = {
 	element: null,
 	get: function (o) {
 		function F() { }
@@ -820,24 +820,6 @@ var cdom = {
 		this.element.style.width = w
 		return this
 	},
-	removeClass: function(c) {
-		var el = this.element
-		if (typeof c == "undefined")
-			el.className = ''
-		else if (el.classList)
-			el.classList.remove(c)
-		else
-			el.className = el.className.replace(new RegExp('(^|\\b)' + c.split(' ').join('|') + '(\\b|$)', 'gi'), ' ')
-		return this
-	},
-	addClass: function(c) {
-		var el = this.element
-		if (el.classList)
-			el.classList.add(c)
-		else
-			el.className += ' ' + c
-		return this;
-	},
 	html: function (h) {
 		if (!this.element)
 			return
@@ -847,7 +829,7 @@ var cdom = {
 };
 
 $ = function(s) {
-	return cdom.get(document.getElementById(s.substring(1)))
+	return dom.get(document.getElementById(s.substring(1)))
 };
 
 $.getJSON = function (url, f) {
